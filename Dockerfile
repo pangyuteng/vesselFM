@@ -17,3 +17,10 @@ SHELL ["conda", "run", "-n", "vesselfm", "/bin/bash", "-c"]
 COPY * /opt/vesselfm
 WORKDIR /opt/vesselfm
 RUN pip install --no-cache-dir -e .
+
+RUN echo "source activate vesselfm" > ~/.bashrc
+ENV PATH=/opt/conda/envs/vesselfm/bin:$PATH
+
+#
+# conda run -n vesselfm python3 /opt/vesselfm/seg/inference.py
+#
