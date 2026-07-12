@@ -14,11 +14,11 @@ error = log/$(cluster).$(process).err
 log = log/$(cluster).$(process).log
 
 +DevShmSize = 4294967296
-requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 30000)
+requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 60000)
 
 request_gpus = 1
 request_cpus = 4
-request_memory = 30GB
+request_memory = 64GB
 request_disk = 4GB
 
 max_materialize = 1

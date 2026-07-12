@@ -174,10 +174,12 @@ python3 /opt/vesselfm/vesselfm/seg/inference.py tta.scales=[2] overlap=0.0 batch
 
 chest hrct smaller veessel:
 
-tta.scales=[0.5,0.75,1.0] batch_size=1 patch_size=[128,128,128]
-tta.scales=[0.5] overlap=0.2 batch_size=1 patch_size=[64,64,64]
-tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[32,32,32]
-tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[8,8,8]
+tta.scales=[0.5,0.75,1.0] batch_size=1 patch_size=[128,128,128] works.
+tta.scales=[0.5] overlap=0.2 batch_size=1 patch_size=[64,64,64] works.
+
+tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[64,64,64]
+
+tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[32,32,32] not working 1,1,1?
 
 python3 /opt/vesselfm/vesselfm/seg/inference.py \
     +myimagepath=/mnt/hd1/tmp/image.nii.gz +myoutputfolder=/mnt/hd1/tmp/out \
