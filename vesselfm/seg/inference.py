@@ -167,8 +167,22 @@ if __name__ == "__main__":
 
 docker run -it -u root:root --shm-size=16G --gpus all -v /mnt:/mnt docker.io/pangyuteng/vesselfm bash
 
-python3 /opt/vesselfm/vesselfm/seg/inference.py tta.overlap=0.0 tta.scales=[2] batch_size=1 patch_size=[128,128,128] \
+chest hrct large veessels: tta.scales=[2]
+
+python3 /opt/vesselfm/vesselfm/seg/inference.py tta.scales=[2] overlap=0.0 batch_size=1 patch_size=[128,128,128] \
     +myimagepath=/mnt/hd1/tmp/image.nii.gz +myoutputfolder=/mnt/hd1/tmp/out
+
+chest hrct smaller veessel:
+
+tta.scales=[0.5,0.75,1.0] batch_size=1 patch_size=[128,128,128]
+tta.scales=[0.5] overlap=0.2 batch_size=1 patch_size=[64,64,64]
+tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[32,32,32]
+tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[8,8,8]
+
+python3 /opt/vesselfm/vesselfm/seg/inference.py \
+    +myimagepath=/mnt/hd1/tmp/image.nii.gz +myoutputfolder=/mnt/hd1/tmp/out \
+    tta.scales=[0.25] overlap=0.2 batch_size=1 patch_size=[8,8,8]
+    
 
 
 """
