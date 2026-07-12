@@ -167,7 +167,7 @@ if __name__ == "__main__":
 
 docker run -it -u root:root --shm-size=16G --gpus all -v /mnt:/mnt docker.io/pangyuteng/vesselfm bash
 
-python3 /opt/vesselfm/vesselfm/seg/inference.py \
+python3 /opt/vesselfm/vesselfm/seg/inference.py tta.overlap=0.0 tta.scales=[2] batch_size=1 patch_size=[128,128,128] \
     +myimagepath=/mnt/hd1/tmp/image.nii.gz +myoutputfolder=/mnt/hd1/tmp/out
 
 
