@@ -90,7 +90,7 @@ def main(cfg):
 
     #image_paths, mask_paths = get_paths(cfg)
     #logger.info(f"Found {len(image_paths)} images in {cfg.image_path}.")
-    image_paths, mask_paths = [image_path],None
+    image_paths, mask_paths = [Path(image_path)],None
 
     file_ending = (cfg.image_file_ending if cfg.image_file_ending else image_paths[0].suffix)
     image_reader_writer = determine_reader_writer(file_ending)()
