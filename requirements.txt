@@ -13,6 +13,6 @@ tensorboard==2.14.0
 huggingface_hub==0.29.1
 h5py
 tifffile
-pylibtiff
+#pylibtiff
 nibabel
 gpustat

@@ -80,11 +80,17 @@ def main(cfg):
     transforms = generate_transforms(cfg.transforms_config)
 
     # i/o
-    output_folder = Path(cfg.output_folder)
+    #output_folder = Path(cfg.output_folder)
+
+    image_path = cfg.myimagepath
+    output_folder = cfg.myoutputfolder
+
+    output_folder = Path(output_folder)
     output_folder.mkdir(exist_ok=True)
 
-    image_paths, mask_paths = get_paths(cfg)
-    logger.info(f"Found {len(image_paths)} images in {cfg.image_path}.")
+    #image_paths, mask_paths = get_paths(cfg)
+    #logger.info(f"Found {len(image_paths)} images in {cfg.image_path}.")
+    image_paths, mask_paths = [image_path],None
 
     file_ending = (cfg.image_file_ending if cfg.image_file_ending else image_paths[0].suffix)
     image_reader_writer = determine_reader_writer(file_ending)()
@@ -156,3 +162,13 @@ def main(cfg):
 
 if __name__ == "__main__":
     main()
+
+"""
+
+docker run -it -u root:root --shm-size=16G --gpus all -v /mnt:/mnt docker.io/pangyuteng/vesselfm bash
+
+python3 /opt/vesselfm/vesselfm/seg/inference.py \
+    +myimagepath=/mnt/hd1/tmp/image.nii.gz +myoutputfolder=/mnt/hd1/tmp/out
+
+
+"""

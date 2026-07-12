@@ -1,26 +1,13 @@
 
-FROM python:3.9-bookworm
+FROM pytorch/pytorch:2.5.1-cuda11.8-cudnn9-runtime
 
-COPY --from=continuumio/miniconda3:26.3.2 /opt/conda /opt/conda
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
-ENV PATH=/opt/conda/bin:$PATH
-
-# https://stackoverflow.com/a/73575335/868736
-RUN set -ex && \
-    conda config --set always_yes yes --set changeps1 no && \
-    conda info -a && \
-    conda config --add channels conda-forge && \
-    conda install --quiet --freeze-installed -c main conda-pack
-
-RUN conda create -n vesselfm python=3.9
-SHELL ["conda", "run", "-n", "vesselfm", "/bin/bash", "-c"]
-COPY * /opt/vesselfm
+RUN mkdir /opt/vesselfm
+COPY . /opt/vesselfm
 WORKDIR /opt/vesselfm
-RUN pip install --no-cache-dir -e .
 
-RUN echo "source activate vesselfm" > ~/.bashrc
-ENV PATH=/opt/conda/envs/vesselfm/bin:$PATH
-
-#
-# conda run -n vesselfm python3 /opt/vesselfm/seg/inference.py
-#
+ENV PYTHONPATH=/opt/vesselfm
+ENV HF_HOME=/opt/huggingfacecache
+ENV PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
